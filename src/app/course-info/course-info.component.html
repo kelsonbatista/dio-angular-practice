@@ -1,0 +1,74 @@
+<h2>Course Info</h2>
+<hr />
+<form #courseForm='ngForm'>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>Name:</label>
+    <div class='col-sm-10'>
+      <!-- o course.name vai fazer o 2way data bind com o course: Course em course-info.comp...ts
+      tb esta sendo passado a variavel de template ngmodel para courseName , afim de fazer as validacoes 
+      a ngClass é uma classe dinamica que adiciona uma condicao ex. só vai adicionar a classe se a variavel de ambiente estiver invalida, assim, ao apagar a variavel, o campo fica vermelho indicando erro -->
+      <input
+        [ngModel]='course?.name'
+        required
+        name='name'
+        type='text'
+        #courseName='ngModel'
+        [ngClass]="{ 'is-invalid': courseName.invalid }"
+        class='form-control'
+      />
+      <div class='invalid-feedback'>
+        <span>Course name is required</span>
+      </div>
+    </div>
+
+    <label class='col-sm-2 col-form-label'>Price:</label>
+    <div class='col-sm-10'>
+      <input
+        [ngModel]='course?.price'
+        required
+        name='price'
+        type='number'
+        #coursePrice='ngModel'
+        [ngClass]="{ 'is-invalid': coursePrice.invalid }"
+        class='form-control'
+      />
+      <div class='invalid-feedback'>
+        <span>Course price is required</span>
+      </div>
+    </div>
+
+    <label class='col-sm-2 col-form-label'>Rating:</label>
+    <div class='col-sm-10'>
+      <input
+        [ngModel]='course?.rating'
+        required
+        name='rating'
+        type='number'
+        #courseRating='ngModel'
+        [ngClass]="{ 'is-invalid': courseRating.invalid }"
+        class='form-control'
+      />
+      <div class='invalid-feedback'>
+        <span>Course rating is required</span>
+      </div>
+    </div>
+
+    <label class='col-sm-2 col-form-label'>Description:</label>
+    <div class='col-sm-10'>
+      <textarea
+        [ngModel]='course?.description'
+        required
+        name='description'
+        #courseDescription='ngModel'
+        [ngClass]="{ 'is-invalid': courseDescription.invalid }"
+        class='form-control'
+        rows='8'
+      ></textarea>
+      <div class='invalid-feedback'>
+        <span>Course description is required</span>
+      </div>
+    </div>
+  </div>
+  <button type='button' [disabled]='courseForm.invalid' (click)='save()' class='btn btn-primary m-2'>Save</button>
+  <button type='button' [routerLink]="['/courses']" class='btn btn-secondary m-2'>Back</button>
+</form>
